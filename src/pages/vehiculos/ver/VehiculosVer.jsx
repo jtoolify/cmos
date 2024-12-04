@@ -1,11 +1,15 @@
+import React, { useState } from "react";
 import FichaTecnica from "../../../components/FichaTecnica/FichaTecnica";
 import VehiculoInfo from "../../../components/VehiculoInfo/VehiculoInfo";
-import imgcar from "../../../assets/img/carro.jpeg";
 import VehiculoMenu from "../../../components/VehiculoMenu/VehiculoMenu";
+import imgcar from "../../../assets/img/carro.jpeg";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import Tabla from "../../../components/Tabla/Tabla";
 
 function VehiculosVer() {
   const { placa } = useParams();
+  const [seccionActiva, setSeccionActiva] = useState("Ficha técnica");
 
   const vehiculos = [
     {
@@ -108,13 +112,104 @@ function VehiculosVer() {
       Interno: "#67890"
     }
   ];
-  
 
-  const vehiculo = vehiculos.find(v => v.Placa === placa);
+  const vehiculo = vehiculos.find((v) => v.Placa === placa);
 
   if (!vehiculo) {
     return <p>No se encontró un vehículo con esa placa.</p>;
   }
+
+  const renderSeccionActiva = () => {
+    switch (seccionActiva) {
+      case "Ficha técnica":
+
+
+        
+        return (
+          <FichaTecnica
+            placa={vehiculo.Placa}
+            marca={vehiculo.Marca}
+            tipoCarroceria={vehiculo.TipoCarroceria}
+            chasis={vehiculo.Chasis}
+            linea={vehiculo.Linea}
+            combustible={vehiculo.Combustible}
+            propietario={vehiculo.Propietario}
+            cilindraje={vehiculo.Cilindraje}
+            capacidad={vehiculo.Capacidad}
+            identificacion={vehiculo.Identificacion}
+            servicio={vehiculo.Servicio}
+            motor={vehiculo.Motor}
+            fechaMatricula={vehiculo.FechaMatricula}
+            clase={vehiculo.Clase}
+            vin={vehiculo.Vin}
+            organismoTransito={vehiculo.OrganismoTransito}
+            licencia={vehiculo.Licencia}
+            afiliadoCon={vehiculo.AfiliadoCon}
+            interno={vehiculo.Interno}
+          />
+        );
+      case "Documentación":
+
+      const botones = [
+        { nombre: 'Ver', link: '/vehiculos/ver/', color: '#519453c7' },    
+        { nombre: 'Editar', link: '/vehiculos/editar/', color: '#FF9800c7' }, 
+        { nombre: 'Eliminar', link: '/eliminar/', color: '#f44336c7' }, 
+      ];
+      
+      const datos = [
+          { Placa: 'DLZ759',  Marca: "mazda" ,Linea: "BT 50", "Tipo vehiculo": "Pick up", Modelo: "2012", Proveedor: "KAREN LICET ZAMBRANO BARRETO ajksajkbskja ajshash uiags ka iuagsjab ", Contrato: "con contrato", "estado": "taller" },
+          { Placa: 'DLZ754',  Marca: "mazda" ,Linea: "BT 50", "Tipo vehiculo": "Pick up", Modelo: "2012", Proveedor: "KAREN LICET ZAMBRANO BARRETO", Contrato: "sin contrato", "estado": "taller" },
+          { Placa: 'DLZ753',  Marca: "mazda" ,Linea: "BT 50", "Tipo vehiculo": "Pick up", Modelo: "2012", Proveedor: "KAREN LICET ZAMBRANO BARRETO", Contrato: "con contrato", "estado": "taller" },
+          { Placa: 'DLZ752',  Marca: "mazda" ,Linea: "BT 50", "Tipo vehiculo": "Pick up", Modelo: "2012", Proveedor: "KAREN LICET ZAMBRANO BARRETO", Contrato: "sin contrato", "estado": "taller" },
+          { Placa: 'DLZ751',  Marca: "mazda" ,Linea: "BT 50", "Tipo vehiculo": "Pick up", Modelo: "2012", Proveedor: "KAREN LICET ZAMBRANO BARRETO", Contrato: "sin contrato", "estado": "taller" },
+      
+      ];
+
+        return ( <Tabla
+          datos={datos}      
+  
+          mostrarAcciones={true}    
+          columnaAccion="Placa"   
+          botonesAccion={botones}  
+  
+          habilitarPaginacion={false}
+  
+          habilitarBusqueda={false}
+  
+  
+          habilitarOrdenamiento={true}
+          // columnasVisibles={['Linea', 'Modelo']}
+  
+          habilitarExportacion={true}
+  
+          // nombreExcel="lista_de_vehiculos"
+  
+          habilitarTotalRegistros={false}
+          > 
+  
+          </Tabla>);
+      case "Comparendos":
+        return <p>Componente de Comparendos</p>;
+      case "Seg. odómetro":
+        return <p>Componente de Seguimiento de Odómetro</p>;
+      case "Mantenimientos":
+        return <p>Componente de Mantenimientos</p>;
+      case "Contratación":
+        return <p>Componente de Contratación</p>;
+      case "Operatividad":
+        return <p>Componente de Operatividad</p>;
+      case "Inspecciones":
+        return <p>Componente de Inspecciones</p>;
+      case "Latonería":
+        return <p>Componente de Latonería</p>;
+      case "Siniestros":
+        return <p>Componente de Siniestros</p>;
+      case "Proveedor":
+        return <p>Componente de Proveedor</p>;
+      default:
+        return <p>Selecciona una opción válida</p>;
+    }
+  };
 
   return (
     <div>
@@ -133,29 +228,9 @@ function VehiculosVer() {
         imagenSrc={vehiculo.ImagenSrc}
       />
 
-      <VehiculoMenu placa={vehiculo.Placa} />
+      <VehiculoMenu placa={vehiculo.Placa} setSeccionActiva={setSeccionActiva} />
 
-      <FichaTecnica
-        placa={vehiculo.Placa}
-        marca={vehiculo.Marca}
-        tipoCarroceria={vehiculo.TipoCarroceria}
-        chasis={vehiculo.Chasis}
-        linea={vehiculo.Linea}
-        combustible={vehiculo.Combustible}
-        propietario={vehiculo.Propietario}
-        cilindraje={vehiculo.Cilindraje}
-        capacidad={vehiculo.Capacidad}
-        identificacion={vehiculo.Identificacion}
-        servicio={vehiculo.Servicio}
-        motor={vehiculo.Motor}
-        fechaMatricula={vehiculo.FechaMatricula}
-        clase={vehiculo.Clase}
-        vin={vehiculo.Vin}
-        organismoTransito={vehiculo.OrganismoTransito}
-        licencia={vehiculo.Licencia}
-        afiliadoCon={vehiculo.AfiliadoCon}
-        interno={vehiculo.Interno}
-      />
+      <div>{renderSeccionActiva()}</div>
     </div>
   );
 }

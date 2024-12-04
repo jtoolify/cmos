@@ -1,25 +1,31 @@
-import React from 'react';
-import './styles.css'; 
+import React from "react";
+import "./styles.css";
 
-const VehiculoMenu = ({placa}) => {
+const VehiculoMenu = ({ placa, setSeccionActiva }) => {
+  const handleChange = (e) => {
+    setSeccionActiva(e.target.value);
+  };
+
   return (
     <div className="contenedor-version-1">
       <div className="contenedor-version-1-info">
         <div className="contenedor-version-1-info-titulo">
-          <h2>Ver detalles del vehículo: <span>{placa}</span></h2>
+          <h2>
+            Ver detalles del vehículo: <span>{placa}</span>
+          </h2>
           <div className="contenedor-menu-vehiculo">
-            <select name="" id="">
-              <option value="">Ficha técnica</option>
-              <option value="">Documentación</option>
-              <option value="">Comparendos</option>
-              <option value="">Seg. odómetro</option>
-              <option value="">Mantenimientos</option>
-              <option value="">Contratación</option>
-              <option value="">Operatividad</option>
-              <option value="">Inspecciones</option>
-              <option value="">Latonería</option>
-              <option value="">Siniestros</option>
-              <option value="">Proveedor</option>
+            <select name="menu" id="menu" onChange={handleChange}>
+              <option value="Ficha técnica">Ficha técnica</option>
+              <option value="Documentación">Documentación</option>
+              <option value="Comparendos">Comparendos</option>
+              <option value="Seg. odómetro">Seg. odómetro</option>
+              <option value="Mantenimientos">Mantenimientos</option>
+              <option value="Contratación">Contratación</option>
+              <option value="Operatividad">Operatividad</option>
+              <option value="Inspecciones">Inspecciones</option>
+              <option value="Latonería">Latonería</option>
+              <option value="Siniestros">Siniestros</option>
+              <option value="Proveedor">Proveedor</option>
             </select>
           </div>
         </div>
