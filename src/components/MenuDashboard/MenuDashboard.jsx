@@ -1,10 +1,38 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./menucss.css";
 import { menuItems } from "../../data/menuItems";
+
 const MenuDashboard = () => {
+  const location = useLocation(); // Obtiene la ubicación actual de la ruta
   const [activeLink, setActiveLink] = useState(null); // Controla el enlace activo
   const [openSubmenu, setOpenSubmenu] = useState(null); // Controla el submenú abierto
+
+  useEffect(() => {
+    // Establece el enlace activo basándose en la ruta actual
+    const currentPath = location.pathname;
+    const matchedItem = menuItems.find((item, menuIndex) => {
+      if (item.path === currentPath) {
+        setActiveLink(`${menuIndex}`);
+        return true;
+      }
+
+      // Si tiene submenú, verificar los subelementos
+      if (item.submenu) {
+        const matchedSubItem = item.submenu.find((subItem, subIndex) => subItem.path === currentPath);
+        if (matchedSubItem) {
+          setActiveLink(`${menuIndex}-${item.submenu.indexOf(matchedSubItem)}`);
+          return true;
+        }
+      }
+      return false;
+    });
+
+    // Si la ruta no coincide con ningún enlace del menú, resetear el estado
+    if (!matchedItem) {
+      setActiveLink(null);
+    }
+  }, [location, menuItems]); // Ejecuta el efecto cuando cambie la ubicación o el menú
 
   const handleLinkClick = (menuIndex, subIndex = null) => {
     const linkIdentifier = subIndex !== null ? `${menuIndex}-${subIndex}` : `${menuIndex}`;

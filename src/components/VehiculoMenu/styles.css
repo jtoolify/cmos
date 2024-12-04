@@ -1,0 +1,90 @@
+.contenedor-version-1 {
+    display: flex;
+    border-radius: 10px;
+    padding: 20px;
+    gap: 30px;
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background-color: var(--bg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#app.toggle .contenedor-version-1 {
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .1), 0px 8px 16px rgba(0, 0, 0, .1);
+}
+
+.contenedor-version-1-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contenedor-version-1-info-titulo {
+    display: flex;
+    align-items: center;
+}
+
+#app.toggle .contenedor-version-1-info-titulo {
+    color: black;
+}
+
+.contenedor-version-1-info-titulo span {
+    font-size: 26px;
+    color: red;
+}
+
+.contenedor-menu-vehiculo {
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-menu-vehiculo select {
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 19px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+}
+
+#app.toggle .contenedor-menu-vehiculo select {
+    background-color: gray; 
+}
+
+.contenedor-menu-vehiculo select:focus {
+    border-color: #66afe9;
+}
+
+.contenedor-menu-vehiculo select option {
+    background-color: #ffffff;
+}
+
+#app.toggle .contenedor-menu-vehiculo select option {
+    background-color: gray; 
+}
+
+@media (max-width: 720px) {
+    .contenedor-version-1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contenedor-version-1-info-titulo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
+    }
+
+    .contenedor-version-1-info-titulo p {
+        margin: 0px;
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "info": {
+      "count": 126,
+      "pages": 7,
+      "next": "https://link.com/api/?page=2",
+      "prev": null
+    },
+    "results": [
+      { }
+    ]
+}
